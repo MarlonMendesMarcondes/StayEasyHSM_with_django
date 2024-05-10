@@ -1,0 +1,12 @@
+#lxml  django-import-export performance
+Django>=4.2,<5
+django-debug-toolbar==3.2.2
+django-crispy-forms==1.14.0
+django-admin-list-filter-dropdown==1.0.3
+django-admin-rangefilter==0.9.0
+django-autocomplete-light==3.9.5-rc6
+django-import-export==3.2.0
+django-taggit==2.1.0
+django-taggit-helpers==0.1.4
+django-jazzmin==3.0.0
+
