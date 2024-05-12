@@ -140,6 +140,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'userauths.User'
+
 JAZZMIN_SETTINGS = {
     'site_header': "StayEasy",
     'site_brand': "Your #1 website for collectibles",
