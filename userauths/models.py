@@ -21,23 +21,27 @@ def user_directory_path(instance, filename):
     return "user_{0}/{1}".format(instance.user.id, filename)
 
 class User(AbstractUser):
-    full_name = models.CharField(max_length=255, null=True, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     username = models.CharField(max_length=255, unique = True)
     email = models.EmailField(max_length=255, unique = True)
     phone = models.CharField(max_length=30, null = True, blank = True)
     gender = models.CharField(max_length=20, choices=GENDER, default="Outros")
     
     otp = models.CharField(max_length=100,null = True, blank = True)
-    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'email'
     def __self__(self):
         return self.full_name
-
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
 class Profile(models.Model):
     pid = ShortUUIDField(max_length=25, alphabet="abcdefghijklmnopqrstuvwxyz123")
     image = models.FileField(upload_to=user_directory_path, default="default.jpg", null = True, blank = True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=255, null=True, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     username = models.CharField(max_length=255, unique = True)
     email = models.EmailField(max_length=255, unique = True)
     phone = models.CharField(max_length=30, null = True, blank = True)
@@ -60,13 +64,18 @@ class Profile(models.Model):
     
     class Meta:
         ordering = ['-date']
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
         
     def __self__(self):
         if self.fullname:
             return f"{self.full_name}"
         else:
             return f"{self.user.username}"
-        
+    
+     
+       
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
