@@ -1,31 +1,23 @@
 {% extends 'base.html' %}
 {% load static%}
     <title>{% block title %}Home{% endblock %}</title>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel</title>
-</head>
-<body>
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1>Welcome back {{ request.user.username }}</h1>
+        <a href="">Logout</a>
+    {% else %}
+        <h1>Welcome to StayEasy</h1>
+        <a href="{% url 'userauths:register' %}">Register</a>
+        <a href="{% url 'userauths:login' %}">Login</a>
+        <a href="{% url 'userauths:logout' %}">Logout</a>
+    {% endif %}
 
-        
-        {% if request.user.is_authenticated %}
-            <h1>Welcome back {{ request.user.username }}</h1>
-            <a href="">Logout</a>
-        {% else %}
-            <h1>Welcome to StayEasy</h1>
-            <a href="{% url 'userauths:register' %}">Register</a>
-            <a href="">Login</a>
-        {% endif %}
-
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-sucess">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-            
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}            
         
     
     

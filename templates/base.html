@@ -9,19 +9,31 @@
   {% bootstrap_javascript %}
 </head>
 <body>
+<header>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid m-auto d-flex justify-content-around">
+      <ul class="nav bg-dark ">
+        <li class="nav-item ">
+          <a class="navbar-brand" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="{% url 'userauths:register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="{% url 'userauths:login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="{% url 'userauths:logout' %}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>  
 
-<div class="container">
-  <ul class="nav bg-info">
-    <li class="nav-item">
-      <a class="nav-link link-light" href="/">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link link-light" href="/user/register">Register</a>
-    </li>
-  </ul>
-
+  
   {% block content %}
   {% endblock %}
+ 
 </div>
 </body>
 </html>

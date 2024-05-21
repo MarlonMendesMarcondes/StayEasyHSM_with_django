@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from userauths.models import User, Profile
 from userauths.forms import UserRegisterForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 
@@ -10,6 +10,8 @@ def RegisterView(request):
     form = UserRegisterForm(request.POST)
     if request.user.is_authenticated:
         return redirect("hotel:index")
+    
+        
     
     if request.method == "POST":
         
@@ -20,22 +22,22 @@ def RegisterView(request):
             last_name = form.cleaned_data.get('last_name')
             phone = form.cleaned_data.get('phone')
             email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
             profile = Profile.objects.get(user=request.user)
             profile.first_name = first_name
             profile.last_name = last_name
             profile.phone = phone
             profile.email = email
-            return redirect("hotel:index")
-            
+            messages.success(request, f"your register was successfully")
+            user = authenticate(request,email=email,password=password)
+            login(request, user)
+            return redirect("hotel:index")      
+        else:
+            messages.error(request, f"your register was not successfully")   
+    return render(request, "userauths/register.html", {'form': form})        
         
-        
-            
-            
-    return render(request, "userauths/register.html", {'form': form})
 
-     
-
-def loginViewTemp(request):
+def LoginViewTemp(request):
     if request.user.is_authenticated:
         messages.warning(request, f" You are already logged in.")
         return redirect("hotel:index")
@@ -49,17 +51,22 @@ def loginViewTemp(request):
         try:
             user_query = User.objects.get(email=email)
             user_auth = authenticate(request, email=email, password=password)
-            next_url = request.GET.get("next", "hotel:index")
+            
             
             if user_query is not None:
                 login(request, user_auth)
                 messages.success(request, f"you are logged in")
-                
+                next_url = request.GET.get("next", "hotel:index")
                 return redirect(next_url)
             
             else:
                 messages.error(request, f"User or password dows not exist")
-                return redirect(next_url)
+                return redirect("hotel:index")
         except:
-            pass
-    return render(request, "user/login.html")
+            messages.error(request, f"User or password dows not exist")
+    return render(request, "userauths/login.html")
+
+def LogoutView(request):
+    logout(request)
+    messages.success(request, f"You have been logged out")
+    return redirect("userauths:login")

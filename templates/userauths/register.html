@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
-{% load static%}
+{% load static %}
     <title>{% block title %}Register Form{% endblock %}</title>
 
 
 {% block content %}
     <h2 class="text-center">Welcome to Register</h2>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li id="{{massage.tags}}">{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     {% if form.errors %}
         <div  class="alert">
             <ul>
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <li class="alert alert-primary">{{ error }}</li>
+                
+                {% for error in field.errors %}
+                    <li class="alert alert-primary">{{ error }}</li>
                         
-                    {% endfor %}
                 {% endfor %}
+                
                 {% for error in form.non_field_errors %}
-                    <li>{{ error }}</li>
+                    <li class="alert alert-primary">{{ error }}</li>
                 {% endfor %}
             </ul>
         </div>

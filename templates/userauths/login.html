@@ -1,15 +1,29 @@
 {% extends 'base.html' %}
-{% load static%}
+{% load static %}
     <title>{% block title %}Login{% endblock %}</title>
+{% block content %}   
+    
+    
+    <h1 class="text-center mt-5">Login</h1>
+<section >
+    <div class="container d-flex justify-content-center align-items-center">
+        <form action="" method="POST" class="card p-4 shadow-lg mt-5">
+            {% csrf_token %}
+            <input class="form-control mt-1 " type="email" name="email" placeholder="Email">
+            <input class="form-control mt-3 " type="password" name="password" placeholder="Password">
+            <button class="btn btn-primary  m-3">Login</button>
+        </form>
+    </div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h1>hello</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="text-center alert m-auto w-50 mt-5" id="{{message.tags}}">{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</section>
+{% endblock %}
 </body>
 </html>
