@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'import_export',
     'crispy_forms',
     'taggit',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -148,4 +149,13 @@ JAZZMIN_SETTINGS = {
     'site_logo':"/images/logo.jpg",
     'copyright':"All rights Reserved 2023",
     'welcome_sign':"Welcome to StayEasy",
+}
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
 }
