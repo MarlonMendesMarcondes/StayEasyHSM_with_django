@@ -8,14 +8,14 @@
     {% if messages %}
         <ul>
             {% for message in messages %}
-                <li id="{{massage.tags}}">{{message}}</li>
+                <li class="alert alert-danger">{{message}}</li>
             {% endfor %}
         </ul>
     {% endif %}
+    
     {% if form.errors %}
         <div  class="alert">
             <ul>
-                
                 {% for error in field.errors %}
                     <li class="alert alert-primary">{{ error }}</li>
                         

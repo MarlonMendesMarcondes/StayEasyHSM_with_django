@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 {% load static%}
-    <title>{% block title %}Home{% endblock %}</title>
+<title>{% block title %}Home{% endblock %}</title>
 {% block content %}
     {% if request.user.is_authenticated %}
-        <h1>Welcome back {{ request.user.username }}</h1>
+        <h1 class="text-center">Welcome back {{ request.user.username }}</h1>
         <a href="">Logout</a>
     {% else %}
-        <h1>Welcome to StayEasy</h1>
-        <a href="{% url 'userauths:register' %}">Register</a>
-        <a href="{% url 'userauths:login' %}">Login</a>
-        <a href="{% url 'userauths:logout' %}">Logout</a>
+        <h1 class="text-center">Welcome to StayEasy</h1>
     {% endif %}
 
     {% if messages %}
@@ -17,9 +14,21 @@
             <div class="alert alert-success">{{ message }}</div>
         {% endfor %}
     {% endif %}
-{% endblock %}            
-        
-    
+            
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape"/>
+          </div>
+          <div class="carousel-item">
+            <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera"/>
+          </div>
+          <div class="carousel-item">
+            <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits"/>
+          </div>
+        </div>
+      </div>
+{% endblock %}    
     
 </body>
 </html>
