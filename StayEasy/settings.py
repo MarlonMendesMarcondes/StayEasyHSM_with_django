@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'user_dashboard',
     'userauths',
     # Trird Part Apps
+    'django_ckeditor_5',
     'import_export',
     'crispy_forms',
     'taggit',
@@ -135,7 +136,7 @@ STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static'))]
 
 MEDIA_URL = '/midia/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -159,3 +160,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
 }
+try:
+    from .ckeditorconfig import *
+except ImportError:
+    pass
