@@ -64,6 +64,9 @@ class Hotel(models.Model):
         
     def thumbnail(self):
         return mark_safe("<img src='%s' width='50' height='50' style = 'object-fit: cover; border-radius: 6px;' />" % (self.image.url))
+    
+    def hotel_gallery(self):
+        return HotelGallery.objects.filter(hotel=self)
 
     
 class HotelGallery(models.Model):
