@@ -3,7 +3,7 @@
 <title>{% block title %}Home{% endblock %}</title>
 {% block content %}
     {% if request.user.is_authenticated %}
-        <h1 class="text-center">Welcome back {{ request.user.username }}</h1>
+        <h1 class="text-center">Welcome back {{ request.user.first_name }}</h1>
     {% else %}
         <h1 class="text-center">Welcome to StayEasy</h1>
     {% endif %}
@@ -18,7 +18,7 @@
       <div class="row">
       {% for hotel in hotels %}
           <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
+            <div class="card mb-4 box-shadow p-2">
                 <a href="{% url 'hotel:hotel_detail' hotel.slug %}">
                 <img class="card-img-top" src="{{hotel.image.url}}" alt="Card image cap">
                 </a>

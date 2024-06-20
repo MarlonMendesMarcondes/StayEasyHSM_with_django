@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'taggit',
     'bootstrap5',
+    'django_bootstrap5',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [

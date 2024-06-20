@@ -5,7 +5,7 @@ from userauths.models import User
 from shortuuid.django_fields import ShortUUIDField
 from django_ckeditor_5.fields import CKEditor5Field
 import shortuuid
-
+from taggit.managers import TaggableManager
 HOTEL_STATUS = (
     ("Draft", "Draft"),
     ("Disable", "Disable"),
@@ -37,14 +37,14 @@ PAYMENT_STATUS = (
 class Hotel(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null = True)
     name = models.CharField(max_length=100)
-    description = CKEditor5Field('Text', config_name='extends')
+    description = CKEditor5Field(null=True,blank=True, config_name='extends')
     image = models.ImageField(upload_to="hotel_galley")
     address = models.CharField(max_length=200)
     mobile = models.CharField(max_length=200)
     email = models.EmailField(max_length=100)
     status = models.CharField(max_length=20, choices=HOTEL_STATUS)
     
-    tags= models.CharField(max_length=200, help_text= "Separed tags with commas")
+    tags= TaggableManager(blank = True)
     views = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
     hid = ShortUUIDField(unique=True, max_length=22, alphabet="abcdefghijklmnopqrstuvwxyz123")
@@ -130,7 +130,7 @@ class Room(models.Model):
     rid = ShortUUIDField(unique=True, max_length=22, alphabet="abcdefghijklmnopqrstuvwxyz123")
     
     def __str__(self):
-        return f"{self.type} - {self.hotel.name} - {self.price}"
+        return f"{self.room_type.type} - {self.hotel.name} - {self.room_number} - {self.is_avaliable}"
     class Meta:
         verbose_name_plural = "Rooms"
         
