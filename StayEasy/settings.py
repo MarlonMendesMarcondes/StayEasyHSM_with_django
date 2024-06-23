@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Custom Apps
     'addon',
     'hotel',
+    'booking',
     'room',
     'user_dashboard',
     'userauths',

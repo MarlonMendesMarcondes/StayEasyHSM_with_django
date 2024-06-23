@@ -6,3 +6,7 @@
 ul{
     list-style-type: none;
 }
+body{
+    background-color: darkgray;
+    color: #f2efe9;
+}

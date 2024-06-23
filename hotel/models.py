@@ -63,10 +63,13 @@ class Hotel(models.Model):
         super(Hotel, self).save(*args, **kwargs)
         
     def thumbnail(self):
-        return mark_safe("<img src='%s' width='50' height='50' style = 'object-fit: cover; border-radius: 6px;' />" % (self.image.url))
+        return mark_safe("<img src='%s' width='50' height='50' style = 'object-fit: cover; border-radius: 10px;' />" % (self.image.url))
     
     def hotel_gallery(self):
         return HotelGallery.objects.filter(hotel=self)
+    
+    def hotel_room_types(self):
+        return RoomType.objects.filter(hotel = self)
 
     
 class HotelGallery(models.Model):
@@ -109,6 +112,7 @@ class RoomType(models.Model):
     type = models.CharField(max_length=10)
     price = models.DecimalField(max_digits=12, decimal_places=2,)
     number_of_beds = models.PositiveIntegerField(default=0)
+    room_capacity = models.PositiveIntegerField(default=0)
     rtid = ShortUUIDField(unique=True, max_length=22, alphabet="abcdefghijklmnopqrstuvwxyz123")
     slug = models.SlugField(unique=True)
     date = models.DateTimeField(auto_now_add=True)

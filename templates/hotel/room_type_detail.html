@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+<title>{% block title %}Hotel {{hotel.Room}}{% endblock %}</title>
+
+
+{% block content %}
+<div id="titlebar" class="gradient">
+    <h2>{{room.type.type}}</h2>
+    <p>{{rooms.count}} Avaliable Rooms</p>
+    <div class="row">
+        {% for r in rooms %}
+            <div class="card bg-black text-white m-5" style="width: 18rem; border-radius:20px;" >
+                <div class="card-body " >
+                    <li>
+                        <h5>{{r.room_type.type}} N° {{r.room_number}}</h5>
+                        <p><strong>Room Capacity: </strong>{{r.room_type.room_capacity}} </p>
+                        <p><strong>Number of beds: </strong>{{r.room_type.number_of_beds}} </p>
+                        <p><strong>Price: R$ </strong>{{r.room_type.price}} </p>
+                        <a href="#" class="btn btn-primary">View</a>
+                    </li>
+                </div>
+            </div>
+        {% endfor %}
+    </div>   
+</div>
+{% endblock %}
