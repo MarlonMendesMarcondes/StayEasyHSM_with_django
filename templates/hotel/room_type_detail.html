@@ -4,23 +4,46 @@
 
 
 {% block content %}
+<h2 class="text-center">{{room.type.type}}</h2>
+<p class="text-center">{{rooms.count}} Avaliable Rooms</p>
 <div id="titlebar" class="gradient">
-    <h2>{{room.type.type}}</h2>
-    <p>{{rooms.count}} Avaliable Rooms</p>
     <div class="row">
-        {% for r in rooms %}
-            <div class="card bg-black text-white m-5" style="width: 18rem; border-radius:20px;" >
-                <div class="card-body " >
-                    <li>
-                        <h5>{{r.room_type.type}} N° {{r.room_number}}</h5>
-                        <p><strong>Room Capacity: </strong>{{r.room_type.room_capacity}} </p>
-                        <p><strong>Number of beds: </strong>{{r.room_type.number_of_beds}} </p>
-                        <p><strong>Price: R$ </strong>{{r.room_type.price}} </p>
-                        <a href="#" class="btn btn-primary">View</a>
-                    </li>
+        <div class="row"></div>
+            {% for r in rooms %}
+                <div class="card bg-black text-white m-5" style="width: 18rem; border-radius:20px;" >
+                    <div class="card-body " >
+                        <li>
+                            <h5>{{r.room_type.type}} N° {{r.room_number}}</h5>
+                            <p><strong>Room Capacity: </strong>{{r.room_type.room_capacity}} </p>
+                            <p><strong>Number of beds: </strong>{{r.room_type.number_of_beds}} </p>
+                            <p><strong>Price: R$ </strong>{{r.room_type.price}} </p>
+                            <a href="#" class="btn btn-primary">View</a>
+                        </li>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>   
+            {% endfor %}
+        </div>       
+    </div>
+    <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
+        <div class="booking_widget_box" style="border: 1px; border-color:brown ;padding:14px;">
+            <h3><i class="fa fa-calendar"></i> Booking</h3>
+            <form class="row with-forms mt-0" method="POST" action="{% url 'booking:check_room_availability' %}">
+                <input type="hidden" value="{{hotel.id}}" name="hotel-id" id="">
+                <div>
+                    <label for="">Check-in Date</label>
+                    <input type="date" id="date-picker" name="" placeholder="Select Date">
+                </div>
+                <div>
+                    <label for="">Check-out Date</label>
+                    <input type="date" id="date-picker" name="checkout" placeholder="Select Date">
+                </div>
+            </form>
+            <button class="btn btn-primary"> <span>Add to WishList</span></button>
+        </div>
+    </div>
 </div>
+    
+
+
+
 {% endblock %}
